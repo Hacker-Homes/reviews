@@ -7,13 +7,13 @@ const { processFile, csvWriteStream } = helpers;
 
 const REVIEWS_FILE = 'reviews.csv';
 const SEED_FILE = 'seedData.csv';
-const LISTING_COUNT = 1000;
+const LISTING_COUNT = 10000000;
 let currentListingNum = 0;
 let currentReviewNum = 0;
 let currentListingReviewCount = Math.floor(Math.random() * 10) + 1;
 
 
-console.log('Generating and writing seed data to file...');
+console.log('Generating and writing seed data to file...\n');
 
 csvWriteStream.init(
   SEED_FILE,
@@ -28,6 +28,10 @@ csvWriteStream.init(
 const appendData = (data) => {
   if (currentListingNum > LISTING_COUNT - 1) {
     return;
+  }
+
+  if (currentListingNum % 100000 === 0 && currentReviewNum === 0) {
+    console.log(`Processing listing ${currentListingNum}`);
   }
 
   const name = data.reviewer_name.trim().replace(/,/g, '');
@@ -48,8 +52,9 @@ const appendData = (data) => {
     currentListingReviewCount = Math.floor(Math.random() * 10) + 1;
     currentListingNum += 1;
     currentReviewNum = 0;
+  } else {
+    currentReviewNum += 1;
   }
-
 
   csvWriteStream.writeRow(
     [
@@ -57,19 +62,14 @@ const appendData = (data) => {
       location, checkIn, value, cleanliness, communication,
     ],
   );
-
-  currentReviewNum += 1;
 };
 
 
 const generate = async () => {
-  let pass = 1;
-
   while (currentListingNum < LISTING_COUNT - 1) {
     await processFile(REVIEWS_FILE, appendData);
-    console.log(`Completed pass ${pass} (${currentListingNum} listings written)`);
-    pass += 1;
   }
+
   console.log(`\nSuccess! \nGenerated ${currentListingNum} listings`);
   csvWriteStream.end();
 };
