@@ -1,4 +1,3 @@
-/node_modules/
-/package-lock.json
-/.vscode/
-/aws-key/
+node_modules
+reviews.csv
+seedData.csv
