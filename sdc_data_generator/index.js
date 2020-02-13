@@ -34,7 +34,7 @@ const appendData = (data) => {
     console.log(`Processing listing ${currentListingNum}`);
   }
 
-  const name = data.reviewer_name.trim().replace(/,/g, '');
+  const name = `"${data.reviewer_name.trim()}"`;
   const { date } = data;
   const comment = `"${data.comments.trim().replace(/"/g, '')}"`;
 
