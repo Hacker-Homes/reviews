@@ -10,5 +10,5 @@ CREATE TABLE reviews (
   check_in_rating real NOT NULL,
   value_rating real NOT NULL,
   cleanliness_rating real NOT NULL,
-  communication_rating real NOT NULL,
+  communication_rating real NOT NULL
 )
