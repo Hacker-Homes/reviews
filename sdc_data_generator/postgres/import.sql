@@ -1,1 +1,1 @@
-\COPY reviews(listing_id, name, date, comment, overall_rating, accuracy_rating, location_rating, check_in_rating, value_rating, cleanliness_rating, communication_rating) FROM '/home/daniel/Software/reviews/sdc_data_generator/seedData.csv' DELIMITER ',' CSV HEADER;
+\COPY reviews(id, listing_id, name, date, comment, overall_rating, accuracy_rating, location_rating, check_in_rating, value_rating, cleanliness_rating, communication_rating) FROM '/home/daniel/Software/reviews/sdc_data_generator/seedData.csv' DELIMITER ',' CSV HEADER;
