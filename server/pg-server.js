@@ -3,6 +3,8 @@ const express = require('express');
 const morgan = require('morgan');
 const { Pool } = require('pg');
 
+const formatReviews = require('./helpers/formatData');
+
 const app = express();
 const PORT = process.env.PORT || 3004;
 const pool = new Pool({
@@ -20,7 +22,7 @@ app.get('/reviews/:listingId', (req, res) => {
     if (err) {
       res.status(500).send();
     } else {
-      res.send(result.rows);
+      res.send(formatReviews(result.rows));
     }
   });
 });

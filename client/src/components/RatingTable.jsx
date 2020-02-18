@@ -14,19 +14,30 @@ class RatingTable extends React.Component {
     return (
       <div className={style.rating_table}>
         <div className={style.left_rating}>
-          <div className={style.oneRating}><span className={style.ratingName}>Accuracy </span><RatingStar rating={this.props.ratings.accuracy}/></div>
-          <div className={style.oneRating}><span className={style.ratingName}>Communucation </span><RatingStar rating={this.props.ratings.communication}/></div>
-          <div className={style.oneRating}><span className={style.ratingName}>Cleanliness </span><RatingStar rating={this.props.ratings.cleanliness}/></div>
+          <div className={style.oneRating}>
+            <span className={style.ratingName}>Accuracy </span><RatingStar rating={this.props.ratings.accuracy_rating} />
+          </div>
+          <div className={style.oneRating}>
+            <span className={style.ratingName}>Communucation </span><RatingStar rating={this.props.ratings.communication_rating} />
+          </div>
+          <div className={style.oneRating}>
+            <span className={style.ratingName}>Cleanliness </span><RatingStar rating={this.props.ratings.cleanliness_rating} />
+          </div>
         </div>
         <div className={style.right_rating}>
-          <div className={style.oneRating}><span className={style.ratingName}>Location </span><RatingStar rating={this.props.ratings.location}/></div>
-          <div className={style.oneRating}><span className={style.ratingName}>Check-in </span><RatingStar rating={this.props.ratings.check_in}/></div>
-          <div className={style.oneRating}><span className={style.ratingName}>Value </span><RatingStar rating={this.props.ratings.value}/> </div>
+          <div className={style.oneRating}>
+            <span className={style.ratingName}>Location </span><RatingStar rating={this.props.ratings.location_rating} />
+          </div>
+          <div className={style.oneRating}>
+            <span className={style.ratingName}>Check-in </span><RatingStar rating={this.props.ratings.check_in_rating} />
+          </div>
+          <div className={style.oneRating}>
+            <span className={style.ratingName}>Value </span><RatingStar rating={this.props.ratings.value_rating} />
+          </div>
         </div>
       </div>
     )
   }
 }
-
 
 export default RatingTable;
