@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const express = require('express');
+const morgan = require('morgan');
 const { Pool } = require('pg');
 
 const app = express();
@@ -10,6 +11,7 @@ const pool = new Pool({
   database: 'homes',
 });
 
+app.use(morgan('tiny'));
 app.use(express.static(`${__dirname}/../client/dist`));
 
 app.get('/reviews/:listingId', (req, res) => {
