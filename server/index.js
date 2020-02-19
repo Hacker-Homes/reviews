@@ -1,33 +1,37 @@
-const mongoose = require('mongoose');
-const db = require('../database/schema.js');
+/* eslint-disable no-console */
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const morgan = require('morgan');
+const { Pool } = require('pg');
+const formatReviews = require('./helpers/formatReviews');
+
 const app = express();
-const path = require('path');
+const PORT = process.env.PORT || 3004;
 
-const PORT = 3004;
-
-app.use(bodyParser.json());
-app.use(cors());
-app.use(express.static(`${__dirname}/../client/dist`));
-
-app.get('/reviews/:room_id', (req, res) => {
-  mongoose.connect('mongodb://localhost:27017/airbnb', { useNewUrlParser: true });
-  const target = {room_id: req.params.room_id};
-  db.Reviews.find(target)
-    .then((data) => {
-      mongoose.connection.close();
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      mongoose.connection.close();
-      res.status(500).send("Fail to fetch");
-    })
+const pool = new Pool({
+  user: 'daniel',
+  host: 'localhost',
+  database: 'homes',
 });
 
+app.use(morgan('tiny'));
+app.use(express.static(`${__dirname}/../client/dist`));
 
-app.listen(PORT, ()=>{
-  console.log("Server is now listening on port:", PORT);
-  console.log(`Visit website at http://localhost:${PORT}/:id=1`);
+app.get('/reviews/:listingId', (req, res) => {
+  const { listingId } = req.params;
+
+  pool.query(
+    'SELECT * FROM reviews WHERE listing_id = $1 ORDER BY date DESC;',
+    [listingId],
+    (err, result) => {
+      if (err) {
+        res.status(500).send();
+      } else {
+        res.send(formatReviews(result.rows));
+      }
+    },
+  );
+});
+
+app.listen(PORT, () => {
+  console.log('Server listening on port', PORT);
 });
