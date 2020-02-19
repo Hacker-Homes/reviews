@@ -8,7 +8,7 @@ const { processFile, csvWriteStream } = helpers;
 const REVIEWS_FILE = 'reviews.csv';
 const SEED_FILE = 'seedData.csv';
 const LISTING_COUNT = 10000000;
-const MAX_LISTING_REVIEWS = 15;
+const MAX_LISTING_REVIEWS = 10;
 let currentId = 1;
 let currentListingNum = 0;
 let currentReviewNum = 0;
@@ -24,6 +24,7 @@ csvWriteStream.init(
     'id', 'listing_id', 'name', 'date', 'comment', 'overall_rating',
     'accuracy_rating', 'location_rating', 'check_in_rating',
     'value_rating', 'cleanliness_rating', 'communication_rating',
+    'gender', 'profilePicNum',
   ],
 );
 
@@ -39,7 +40,7 @@ const appendData = (data) => {
 
   const name = `"${data.reviewer_name.trim()}"`;
   const { date } = data;
-  const comment = `"${data.comments.trim().replace(/"/g, '\\"').replace(/\n/g, '\\n')}"`;
+  const comment = `"${data.comments.trim().replace(/"/g, '').replace(/\n/g, '\\n')}"`;
 
   const {
     overall,
@@ -59,10 +60,13 @@ const appendData = (data) => {
     currentReviewNum += 1;
   }
 
+  const gender = Math.floor(Math.random() * 2);
+  const profilePicNum = Math.floor(Math.random() * 100);
+
   csvWriteStream.writeRow(
     [
       currentId, currentListingNum, name, date, comment, overall, accuracy,
-      location, checkIn, value, cleanliness, communication,
+      location, checkIn, value, cleanliness, communication, gender, profilePicNum,
     ],
   );
 

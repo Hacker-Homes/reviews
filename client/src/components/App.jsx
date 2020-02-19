@@ -1,28 +1,30 @@
-import axios from 'axios';
-import SearchBar from './SearchBar.jsx';
-import RatingTable from './RatingTable.jsx';
-import ReviewRender from './ReviewRender.jsx';
-import RatingStar from './RatingStar.jsx'
+/* eslint-disable no-console */
 import React from 'react';
-
+import axios from 'axios';
+import SearchBar from './SearchBar';
+import RatingTable from './RatingTable';
+import ReviewRender from './ReviewRender';
+import RatingStar from './RatingStar';
 import style from '../../dist/style.css';
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       original_data: [],
       rev_data: [[]],
-      room_id: Math.floor(Math.random()*99),
       ratings: {},
       overall_rating: 0,
       num_reviews: 0,
-      search_text: "",
-      curPage:0,
-    }
+      search_text: '',
+      curPage: 0,
+    };
+
     this.editSearchText = this.editSearchText.bind(this);
     this.clearSearchText = this.clearSearchText.bind(this);
     this.setCurPage = this.setCurPage.bind(this);
-  };
+  }
 
   // fetch data while enter the website
   componentDidMount() {
@@ -35,13 +37,17 @@ class App extends React.Component {
         });
         this.findOverallRating(response.data[0].reviews);
       })
-      .catch(() => {
-        console.log("error");
+      .catch((err) => {
+        console.error(err);
       });
+  }
 
-  };
+  setCurPage(page) {
+    this.setState({
+      curPage: page,
+    });
+  }
 
-  //calculate average ratings over all reviews
   findOverallRating(rev_array) {
     let sum_rating = {
       accuracy: 0,
@@ -80,7 +86,7 @@ class App extends React.Component {
     let dataForPages = [];
     for (let i = 0; i < totalPages; i++) {
       dataForPages.push(rev_data.slice(7 * i, 7 * (i + 1)));
-    };
+    }
     this.setState({
       rev_data: dataForPages,
     });
@@ -90,49 +96,54 @@ class App extends React.Component {
     e.preventDefault();
     this.setState({
       search_text: e.target.value,
-    })
+    });
   }
 
   clearSearchText(e) {
     e.preventDefault();
     this.setState({
-      search_text: "",
+      search_text: '',
     });
-    document.getElementById("searchTextArea").value = "";
+    document.getElementById('searchTextArea').value = '';
     this.dataSlicer(this.state.original_data);
     this.setCurPage(0);
   }
 
-  setCurPage(page) {
-    this.setState({
-      curPage:page,
-    })
-  }
 
-  render() {    
+  render() {
     return (
       <div className={style.rew_board} >
-        <div className={style.seperator24}></div>
+        <div className={style.seperator24} />
         <div className={style.reviewAndSearchBar}>
-          <div className={style.rev_count}>{this.state.num_reviews} Reviews</div>
-          <span className={style.topRatingStar}><RatingStar rating={this.state.overall_rating}/></span>
+          <div className={style.rev_count}>
+            {`${this.state.num_reviews} Reviews`}
+          </div>
+          <span className={style.topRatingStar}>
+            <RatingStar rating={this.state.overall_rating} />
+          </span>
           <SearchBar original_data={this.state.original_data}
             editSearchText={this.editSearchText}
             dataSlicer={this.dataSlicer.bind(this)}
             search_text={this.state.search_text}
             clearSearchText={this.clearSearchText}
-            setCurPage={this.setCurPage} />
+            setCurPage={this.setCurPage}
+          />
         </div>
-        <div className={style.seperator16}></div>
+        <div className={style.seperator16} />
         <div className={style.ratingTable}>
           <RatingTable ratings={this.state.ratings} />
         </div>
         <div className={style.review_table}>
-          <ReviewRender data={this.state.rev_data} search_text={this.state.search_text} curPage={this.state.curPage} setCurPage={this.setCurPage}/>
+          <ReviewRender
+            data={this.state.rev_data}
+            search_text={this.state.search_text}
+            curPage={this.state.curPage}
+            setCurPage={this.setCurPage}
+          />
         </div>
       </div>
-    )
-  };
+    );
+  }
 }
 
 export default App;
