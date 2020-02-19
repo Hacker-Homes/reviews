@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar';
@@ -29,7 +30,6 @@ class App extends React.Component {
   componentDidMount() {
     axios.get(`/reviews/${window.location.href.match(/id\s*=\s*(.*)/)[1]}`)
       .then((response) => {
-        console.log(response.data);
         this.dataSlicer(response.data[0].reviews);
         this.setState({
           original_data: response.data[0].reviews,
@@ -37,8 +37,8 @@ class App extends React.Component {
         });
         this.findOverallRating(response.data[0].reviews);
       })
-      .catch(() => {
-        console.log('error');
+      .catch((err) => {
+        console.error(err);
       });
   }
 
