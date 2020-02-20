@@ -1,5 +1,5 @@
 import React from 'react';
-import style from '../../dist/style.css';
+import style from '../../public/style.css';
 
 let buttonRender = function (curPage, totalPages, isReview, changePage) {
   const curPageStyle = {background:'#008489', color:'white'}

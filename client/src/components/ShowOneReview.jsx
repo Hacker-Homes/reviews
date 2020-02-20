@@ -1,7 +1,7 @@
 // import Highlighter from 'react-highlight-words';
 import Highlighter from './Highlighter.jsx'
 import React from 'react';
-import style from '../../dist/style.css';
+import style from '../../public/style.css';
 
 
 const CHAR_THRESHOLD = 250;

@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 import RatingTable from './RatingTable';
 import ReviewRender from './ReviewRender';
 import RatingStar from './RatingStar';
-import style from '../../dist/style.css';
+import style from '../../public/style.css';
 
 
 class App extends React.Component {
@@ -28,7 +28,7 @@ class App extends React.Component {
 
   // fetch data while enter the website
   componentDidMount() {
-    axios.get(`/reviews/${window.location.href.match(/id\s*=\s*(.*)/)[1]}`)
+    axios.get(`/api/reviews/${window.location.href.match(/id\s*=\s*(.*)/)[1]}`)
       .then((response) => {
         this.dataSlicer(response.data[0].reviews);
         this.setState({

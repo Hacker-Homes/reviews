@@ -29,6 +29,6 @@ module.exports = {
   resolve: { extensions: ['.jsx', '.js'] },
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'client', 'dist'),
+    path: path.resolve(__dirname, 'client', 'public'),
   },
 };

@@ -5,7 +5,7 @@ const { Pool } = require('pg');
 const formatReviews = require('./helpers/formatReviews');
 
 const app = express();
-const PORT = process.env.PORT || 3004;
+const PORT = process.env.PORT || 3000;
 
 const pool = new Pool({
   user: 'daniel',
@@ -14,9 +14,9 @@ const pool = new Pool({
 });
 
 app.use(morgan('tiny'));
-app.use(express.static(`${__dirname}/../client/dist`));
+app.use(express.static(`${__dirname}/../client/public`));
 
-app.get('/reviews/:listingId', (req, res) => {
+app.get('/api/reviews/:listingId', (req, res) => {
   const { listingId } = req.params;
 
   pool.query(

@@ -1,14 +1,16 @@
-FROM node:10.13-alpine
+FROM node:12.16.1-alpine
 ENV NODE_ENV production
 
-RUN mkdir -p /src/app
+RUN mkdir -p /src/
 
-WORKDIR /src/app
+WORKDIR /src/
 
-COPY . /src/app
+COPY . /src/
 
 RUN npm install
 
-EXPOSE 3004
+RUN npm run build
 
-CMD [ "npm", "run", "review-server" ]
+EXPOSE 3000
+
+CMD [ "npm", "start" ]
