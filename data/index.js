@@ -24,7 +24,7 @@ csvWriteStream.init(
     'id', 'listing_id', 'name', 'date', 'comment', 'overall_rating',
     'accuracy_rating', 'location_rating', 'check_in_rating',
     'value_rating', 'cleanliness_rating', 'communication_rating',
-    'gender', 'profilePicNum',
+    'gender', 'profile_pic_num',
   ],
 );
 
