@@ -19,7 +19,7 @@ CREATE TABLE reviews (
 );
 
 
-\COPY reviews (id, listing_id, name, date, comment, overall_rating, accuracy_rating, location_rating, check_in_rating, value_rating, cleanliness_rating, communication_rating, gender, profile_pic_num) FROM '/home/daniel/Software/reviews/sdc_data_generator/seedData.csv' DELIMITER ',' CSV HEADER;
+\COPY reviews (id, listing_id, name, date, comment, overall_rating, accuracy_rating, location_rating, check_in_rating, value_rating, cleanliness_rating, communication_rating, gender, profile_pic_num) FROM '/home/daniel/Software/reviews/data/seedData.csv' DELIMITER ',' CSV HEADER;
 
 
 CREATE INDEX listing_idx ON reviews (listing_id);
