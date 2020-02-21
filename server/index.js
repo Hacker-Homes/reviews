@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+require('newrelic');
 const express = require('express');
 const morgan = require('morgan');
 const { Pool } = require('pg');
