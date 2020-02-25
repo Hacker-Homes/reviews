@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 require('dotenv').config();
-// require('newrelic');
+require('newrelic');
 const express = require('express');
 // const morgan = require('morgan');
 const { Pool } = require('pg');
@@ -14,7 +14,7 @@ const pool = new Pool({
   password: process.env.PG_PASSWORD,
   host: process.env.PG_HOST,
   database: 'homes',
-  max: 13, 
+  max: 15, 
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
 });
