@@ -1,20 +1,23 @@
 /* eslint-disable no-console */
-require('newrelic');
+require('dotenv').config();
+// require('newrelic');
 const express = require('express');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const { Pool } = require('pg');
 const formatReviews = require('./helpers/formatReviews');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 
 const pool = new Pool({
-  user: 'daniel',
-  host: 'localhost',
+  user: process.env.PG_USER,
+  password: process.env.PG_PASSWORD,
+  host: process.env.PG_HOST,
   database: 'homes',
+  max: 50 
 });
 
-app.use(morgan('tiny'));
+// app.use(morgan('tiny'));
 app.use(express.static(`${__dirname}/../client/public`));
 
 app.get('/api/reviews/:listingId', (req, res) => {
