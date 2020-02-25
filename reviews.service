@@ -1,0 +1,9 @@
+[Unit]
+Description=Reviews service
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /usr/bin/start-reviews
+
+[Install]
+WantedBy=multi-user.target
