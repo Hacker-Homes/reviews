@@ -15,7 +15,7 @@ const pool = new Pool({
   host: process.env.PG_HOST,
   database: 'homes',
   max: 65, 
-  idleTimeoutMillis: 30000,
+  idleTimeoutMillis: 0,
   connectionTimeoutMillis: 500,
 });
 
