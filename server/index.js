@@ -14,7 +14,7 @@ const pool = new Pool({
   password: process.env.PG_PASSWORD,
   host: process.env.PG_HOST,
   database: 'homes',
-  max: 50, 
+  max: 65, 
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 500,
 });
