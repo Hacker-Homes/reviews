@@ -14,9 +14,9 @@ const pool = new Pool({
   password: process.env.PG_PASSWORD,
   host: process.env.PG_HOST,
   database: 'homes',
-  max: 10, 
+  max: 40, 
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  connectionTimeoutMillis: 500,
 });
 
 // app.use(morgan('tiny'));
